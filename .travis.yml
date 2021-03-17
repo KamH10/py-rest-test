@@ -4,7 +4,7 @@ env:
 python:
   - "3.7"
   - "3.7-dev" # 3.7 development branch
-  - "nightly" # currently points to 3.7-dev
+# - "nightly" # currently points to 3.7-dev
 # command to install dependencies
 install:
   - "pip install pytest"
