@@ -1,13 +1,13 @@
-
 from flask_restful import Resource
 from models.store import StoreModel
+
 
 class Store(Resource):
     def get(self, name):
         store = StoreModel.find_by_name(name)
         if store:
             return store.json()
-        return {'message': 'Store not found'}, 404      # **NOTE**
+        return {'message': 'Store not found'}, 404
 
     def post(self, name):
         if StoreModel.find_by_name(name):
@@ -31,5 +31,4 @@ class Store(Resource):
 
 class StoreList(Resource):
     def get(self):
-        # return list items in the store
         return {'stores': [store.json() for store in StoreModel.query.all()]}

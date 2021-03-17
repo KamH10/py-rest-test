@@ -1,9 +1,9 @@
-
 from app import app
 from db import db
 
-db.init_app(app)                # **NOTE**
+db.init_app(app)
 
-@app.before_first_request       # **NOTE**
+
+@app.before_first_request
 def create_tables():
-    db.create_all()             # **NOTE**
+    db.create_all()

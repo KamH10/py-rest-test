@@ -1,15 +1,13 @@
-
 from db import db
 
-class ItemModel(db.Model):          # **NOTE**
-    __tablename__ = 'items'         # **NOTE**
 
-    # **NOTE**
+class ItemModel(db.Model):
+    __tablename__ = 'items'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     price = db.Column(db.Float(precision=2))
 
-    # **NOTE**
     store_id = db.Column(db.Integer, db.ForeignKey('stores.id'))
     store = db.relationship('StoreModel')
 
@@ -19,16 +17,16 @@ class ItemModel(db.Model):          # **NOTE**
         self.store_id = store_id
 
     def json(self):
-        return {'name': self.name, 'price': self.price}
+        return {'id': self.id, 'name': self.name, 'price': self.price}
 
     @classmethod
     def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).first()       # **NOTE**
+        return cls.query.filter_by(name=name).first()
 
     def save_to_db(self):
-        db.session.add(self)        # **NOTE**
-        db.session.commit()         # **NOTE**
+        db.session.add(self)
+        db.session.commit()
 
     def delete_from_db(self):
-        db.session.delete(self)     # **NOTE**
+        db.session.delete(self)
         db.session.commit()
